@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
-from models import User, Numbers, UserAge
+from models import User, Numbers, UserAge, Feedback
 
 app = FastAPI()
 
@@ -36,3 +36,12 @@ async def check_user_age(user_data: UserAge):
         "is_adult": is_adult
     }
     return response
+
+#Задания 2.1-2.2
+feedback_storage = []
+@app.post("/feedback")
+async def submit_feedback(feedback: Feedback):
+    feedbacks.append(feedback)
+    return {
+        "message": f"Спасибо, {feedback.name}! Ваш отзыв сохранён."
+    }
